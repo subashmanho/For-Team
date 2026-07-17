@@ -1,3 +1,12 @@
+/* ======================================================
+   SKILLBRIDGE - MAIN STYLESHEET (index.html)
+   ====================================================== */
+
+/* ------------------------------------------------------
+   1. CSS VARIABLES
+   We store our colors and reusable values here so we can
+   use them anywhere in this file with var(--name).
+   ------------------------------------------------------ */
 :root {
   --color-primary: #2563eb;
   --color-secondary: #4f46e5;
@@ -18,6 +27,9 @@
   --transition-medium: 0.4s ease;
 }
 
+/* ------------------------------------------------------
+   2. RESET / BASE STYLES
+   ------------------------------------------------------ */
 * {
   margin: 0;
   padding: 0;
@@ -32,6 +44,8 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  /* Smooth fade-in when the page loads */
   animation: pageFadeIn 0.6s ease;
 }
 
@@ -46,6 +60,9 @@ body {
   }
 }
 
+/* ------------------------------------------------------
+   3. TOP SECTION (Logo, Title, Subtitle)
+   ------------------------------------------------------ */
 .top-section {
   width: 100%;
   text-align: center;
@@ -85,6 +102,9 @@ body {
   color: var(--color-text-light);
 }
 
+/* ------------------------------------------------------
+   4. AUTH CARD (Login / Sign Up container)
+   ------------------------------------------------------ */
 .auth-container {
   width: 100%;
   display: flex;
@@ -107,6 +127,9 @@ body {
   box-shadow: var(--shadow-hover);
 }
 
+/* ------------------------------------------------------
+   5. TABS (Login / Sign Up switch buttons)
+   ------------------------------------------------------ */
 .tabs {
   display: flex;
   background-color: var(--color-background);
@@ -134,15 +157,20 @@ body {
   box-shadow: var(--shadow-soft);
 }
 
+/* ------------------------------------------------------
+   6. FORMS (shared between Login and Sign Up)
+   ------------------------------------------------------ */
 .auth-form {
-  display: none;
+  display: none;              /* Hidden by default */
   flex-direction: column;
   gap: 16px;
+
+  /* Smooth transition when switching forms */
   animation: formFadeIn var(--transition-medium);
 }
 
 .auth-form.active {
-  display: flex;
+  display: flex;              /* Shown when "active" class is added by JS */
 }
 
 @keyframes formFadeIn {
@@ -177,11 +205,15 @@ body {
   transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
 }
 
+/* Nice glow effect when an input is focused */
 .input-group input:focus {
   border-color: var(--color-primary);
   box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
 }
 
+/* ------------------------------------------------------
+   7. FORM ROW (Remember me + Forgot password)
+   ------------------------------------------------------ */
 .form-row {
   display: flex;
   justify-content: space-between;
@@ -207,6 +239,9 @@ body {
   text-decoration: underline;
 }
 
+/* ------------------------------------------------------
+   8. BUTTONS
+   ------------------------------------------------------ */
 .primary-btn {
   padding: 13px;
   border: none;
@@ -254,6 +289,9 @@ body {
   color: var(--color-primary);
 }
 
+/* ------------------------------------------------------
+   9. DIVIDER ("OR" line)
+   ------------------------------------------------------ */
 .divider {
   display: flex;
   align-items: center;
@@ -273,6 +311,9 @@ body {
   padding: 0 10px;
 }
 
+/* ------------------------------------------------------
+   10. SWITCH TEXT (Don't have an account? / Already have one?)
+   ------------------------------------------------------ */
 .switch-text {
   text-align: center;
   font-size: 0.88rem;
@@ -289,12 +330,20 @@ body {
   text-decoration: underline;
 }
 
+/* ------------------------------------------------------
+   11. ERROR TEXT (password mismatch, etc.)
+   ------------------------------------------------------ */
 .error-text {
   color: var(--color-error);
   font-size: 0.82rem;
   min-height: 18px;
 }
 
+/* ------------------------------------------------------
+   12. RESPONSIVE DESIGN
+   ------------------------------------------------------ */
+
+/* Tablet */
 @media (max-width: 768px) {
   .main-title {
     font-size: 1.6rem;
@@ -306,6 +355,7 @@ body {
   }
 }
 
+/* Mobile */
 @media (max-width: 480px) {
   .top-section {
     padding: 32px 16px 16px;
