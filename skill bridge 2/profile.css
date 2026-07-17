@@ -1,0 +1,529 @@
+/* ======================================================
+   SKILLBRIDGE - PROFILE STYLESHEET (profile.html)
+   ====================================================== */
+
+/* ------------------------------------------------------
+   1. CSS VARIABLES (same palette as style.css)
+   ------------------------------------------------------ */
+:root {
+  --color-primary: #2563eb;
+  --color-secondary: #4f46e5;
+  --color-background: #f8fafc;
+  --color-card: #ffffff;
+  --color-text-dark: #1e293b;
+  --color-text-light: #64748b;
+  --color-border: #e2e8f0;
+
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-pill: 999px;
+
+  --shadow-soft: 0 4px 20px rgba(37, 99, 235, 0.08);
+  --shadow-hover: 0 8px 30px rgba(37, 99, 235, 0.15);
+
+  --transition-fast: 0.2s ease;
+  --transition-medium: 0.4s ease;
+
+  /* A small set of colors used to make skill tags colorful */
+  --tag-color-1: #2563eb;
+  --tag-color-2: #4f46e5;
+  --tag-color-3: #0891b2;
+  --tag-color-4: #db2777;
+  --tag-color-5: #ea580c;
+  --tag-color-6: #16a34a;
+}
+
+/* ------------------------------------------------------
+   2. RESET / BASE STYLES
+   ------------------------------------------------------ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background-color: var(--color-background);
+  color: var(--color-text-dark);
+  animation: pageFadeIn 0.5s ease;
+}
+
+@keyframes pageFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ------------------------------------------------------
+   3. PAGE HEADER
+   ------------------------------------------------------ */
+.profile-header {
+  text-align: center;
+  padding: 40px 20px 20px;
+}
+
+.profile-header h1 {
+  font-size: 1.9rem;
+  font-weight: 800;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 6px;
+}
+
+.profile-header p {
+  color: var(--color-text-light);
+  font-size: 1rem;
+}
+
+.profile-header-row {
+  max-width: 700px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  text-align: left;
+}
+
+.logout-btn {
+  padding: 10px 18px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  background: var(--color-card);
+  color: var(--color-text-dark);
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  white-space: nowrap;
+}
+
+.logout-btn:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+/* ------------------------------------------------------
+   4. LAYOUT CONTAINER
+   ------------------------------------------------------ */
+.profile-container {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* ------------------------------------------------------
+   5. CARD STYLE (Each numbered section)
+   ------------------------------------------------------ */
+.profile-card {
+  background-color: var(--color-card);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow-soft);
+  transition: box-shadow var(--transition-medium), transform var(--transition-medium);
+}
+
+.profile-card:hover {
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-2px);
+}
+
+.section-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: var(--color-text-dark);
+}
+
+.section-hint {
+  font-size: 0.85rem;
+  color: var(--color-text-light);
+  margin-bottom: 16px;
+}
+
+/* ------------------------------------------------------
+   6. FORM GRID (Basic Information fields)
+   Uses CSS Grid so fields line up in 2 columns on desktop
+   and 1 column on mobile.
+   ------------------------------------------------------ */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.input-group.full-width {
+  grid-column: 1 / -1;
+  margin-top: 16px;
+}
+
+.input-group label {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.input-group input,
+.input-group select,
+.input-group textarea {
+  padding: 11px 14px;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: 0.95rem;
+  font-family: inherit;
+  outline: none;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.input-group input:focus,
+.input-group select:focus,
+.input-group textarea:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.input-group textarea {
+  resize: vertical;
+}
+
+/* ------------------------------------------------------
+   7. PROFILE IMAGE UPLOAD
+   ------------------------------------------------------ */
+.image-upload-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.image-preview {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--color-border);
+  background-color: var(--color-background);
+}
+
+.upload-label {
+  padding: 10px 18px;
+  background-color: var(--color-background);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+}
+
+.upload-label:hover {
+  background-color: #eef2ff;
+}
+
+/* ------------------------------------------------------
+   8. EXAMPLE SKILL BUTTONS (clickable chips to quick-add)
+   ------------------------------------------------------ */
+.example-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.example-skill-btn {
+  padding: 7px 14px;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  background-color: var(--color-background);
+  font-size: 0.83rem;
+  font-weight: 600;
+  color: var(--color-text-dark);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.example-skill-btn:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  transform: translateY(-2px);
+}
+
+.example-skill-btn.selected {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: white;
+}
+
+/* ------------------------------------------------------
+   9. CUSTOM SKILL INPUT ROW
+   ------------------------------------------------------ */
+.custom-skill-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.custom-skill-row input {
+  flex: 1;
+  padding: 10px 14px;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color var(--transition-fast);
+}
+
+.custom-skill-row input:focus {
+  border-color: var(--color-primary);
+}
+
+.add-btn {
+  padding: 10px 18px;
+  border: none;
+  border-radius: var(--radius-md);
+  background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+  color: white;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: transform var(--transition-fast);
+}
+
+.add-btn:hover {
+  transform: translateY(-2px);
+}
+
+/* ------------------------------------------------------
+   10. SKILL TAGS (colorful pills showing selected skills)
+   ------------------------------------------------------ */
+.tag-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-height: 20px;
+}
+
+.skill-tag {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: var(--radius-pill);
+  color: white;
+  font-size: 0.83rem;
+  font-weight: 600;
+  animation: tagPopIn 0.25s ease;
+}
+
+@keyframes tagPopIn {
+  from {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.skill-tag .remove-tag {
+  cursor: pointer;
+  font-weight: 800;
+  opacity: 0.85;
+}
+
+.skill-tag .remove-tag:hover {
+  opacity: 1;
+}
+
+/* ------------------------------------------------------
+   11. RADIO BUTTONS (Learning Preference)
+   ------------------------------------------------------ */
+.radio-group {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.radio-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.radio-label input {
+  accent-color: var(--color-primary);
+  width: 16px;
+  height: 16px;
+}
+
+/* ------------------------------------------------------
+   12. ACTION BUTTONS (Back / Save Profile)
+   ------------------------------------------------------ */
+.action-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+.back-btn,
+.save-btn {
+  flex: 1;
+  padding: 14px;
+  border-radius: var(--radius-md);
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.back-btn {
+  background-color: var(--color-card);
+  border: 1.5px solid var(--color-border);
+  color: var(--color-text-dark);
+}
+
+.back-btn:hover {
+  background-color: var(--color-background);
+  transform: translateY(-2px);
+}
+
+.save-btn {
+  border: none;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+  color: white;
+}
+
+.save-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+
+/* ------------------------------------------------------
+   13. SUCCESS POPUP
+   ------------------------------------------------------ */
+.popup-overlay {
+  display: none;              /* Hidden by default */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(15, 23, 42, 0.5);
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  animation: overlayFadeIn 0.25s ease;
+}
+
+.popup-overlay.show {
+  display: flex;              /* Shown when JS adds the "show" class */
+}
+
+@keyframes overlayFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.popup-box {
+  background-color: var(--color-card);
+  padding: 36px;
+  border-radius: var(--radius-lg);
+  text-align: center;
+  max-width: 320px;
+  width: 90%;
+  box-shadow: var(--shadow-hover);
+  animation: popupPopIn 0.3s ease;
+}
+
+@keyframes popupPopIn {
+  from {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.popup-icon {
+  width: 56px;
+  height: 56px;
+  line-height: 56px;
+  margin: 0 auto 16px;
+  border-radius: 50%;
+  background-color: #dcfce7;
+  color: #16a34a;
+  font-size: 1.6rem;
+}
+
+.popup-box h3 {
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+  color: var(--color-text-dark);
+}
+
+.popup-close-btn {
+  padding: 10px 24px;
+  border: none;
+  border-radius: var(--radius-md);
+  background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform var(--transition-fast);
+}
+
+.popup-close-btn:hover {
+  transform: translateY(-2px);
+}
+
+/* ------------------------------------------------------
+   14. RESPONSIVE DESIGN
+   ------------------------------------------------------ */
+
+/* Tablet */
+@media (max-width: 768px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .profile-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .profile-card {
+    padding: 20px;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+  }
+
+  .radio-group {
+    flex-direction: column;
+    gap: 12px;
+  }
+}

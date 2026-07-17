@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skill Exchange Matcher</title>
+    <link rel="stylesheet" href="match.css">
+</head>
+<body>
+    <header class="app-header">
+        <div class="logo">
+            <span class="logo-icon">🔄</span>
+            <h1>SkillExchange</h1>
+        </div>
+        <div class="header-actions">
+            <button id="btn-add-user" class="btn btn-primary">➕ Add User</button>
+            <button id="theme-toggle" class="btn btn-icon" title="Toggle Dark Mode">🌙</button>
+        </div>
+    </header>
+
+    <div class="app-container">
+        <!-- Left Panel: User Profile & Dashboard -->
+        <aside class="left-panel">
+            <div class="card selector-card">
+                <label for="user-selector">Active User View (You)</label>
+                <select id="user-selector">
+                    <option value="">No users available...</option>
+                </select>
+            </div>
+
+            <div class="card profile-card" id="active-profile">
+                <!-- Injected via JS -->
+                <div class="empty-state">
+                    <p>No users in the system.</p>
+                    <p>Click "Add User" to get started!</p>
+                </div>
+            </div>
+
+            <div class="card messages-card">
+                <h3>Recent Chats</h3>
+                <div id="recent-messages">
+                    <div class="empty-state">
+                        <p>No recent chats yet.</p>
+                        <p>Open a conversation to start messaging.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card dashboard-card">
+                <h3>Platform Statistics</h3>
+                <div class="stats-grid" id="dashboard-stats">
+                    <!-- Injected via JS -->
+                </div>
+            </div>
+        </aside>
+
+        <!-- Right Panel: Matches & Search -->
+        <main class="right-panel">
+            <div class="toolbar">
+                <div class="search-box">
+                    <span class="icon">🔍</span>
+                    <input type="text" id="search-input" placeholder="Search by Name, Skill, or Location..." disabled>
+                </div>
+                
+                <div class="filters">
+                    <select id="filter-min-match" disabled>
+                        <option value="0">Any Match %</option>
+                        <option value="90">Perfect (90%+)</option>
+                        <option value="75">Excellent (75%+)</option>
+                        <option value="60">Strong (60%+)</option>
+                        <option value="40">Good (40%+)</option>
+                    </select>
+                    
+                    <select id="filter-level" disabled>
+                        <option value="">Any Level</option>
+                        <option value="Beginner">Beginner</option>
+                        <option value="Intermediate">Intermediate</option>
+                        <option value="Advanced">Advanced</option>
+                        <option value="Expert">Expert</option>
+                    </select>
+
+                    <select id="filter-availability" disabled>
+                        <option value="">Any Availability</option>
+                        <option value="Weekends">Weekends</option>
+                        <option value="Evenings">Evenings</option>
+                        <option value="Weekdays">Weekdays</option>
+                        <option value="Flexible">Flexible</option>
+                    </select>
+
+                    <select id="sort-matches" disabled>
+                        <option value="highest">Sort: Highest Match</option>
+                        <option value="lowest">Sort: Lowest Match</option>
+                        <option value="alphabetical">Sort: Alphabetical</option>
+                        <option value="shared">Sort: Most Shared Skills</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="matches-header">
+                <h2>Suggested Matches <span id="match-count" class="badge count-badge">0</span></h2>
+                <button id="btn-clear-data" class="btn btn-danger btn-small">Trash All Data</button>
+            </div>
+
+            <div class="matches-grid" id="matches-container">
+                <!-- Matches injected via JS -->
+                <div class="empty-state-large" style="grid-column: 1/-1;">
+                    <h3>Ready to Match!</h3>
+                    <p>Add at least two users to see the matching algorithm in action.</p>
+                </div>
+            </div>
+
+            <div class="chat-panel card">
+                <div class="chat-panel-header">
+                    <div>
+                        <h3 id="chat-panel-title">Chat Panel</h3>
+                        <p id="chat-panel-status">Select a user and click Message.</p>
+                    </div>
+                    <div class="chat-panel-call-actions">
+                        <button id="chat-panel-audio-call-btn" class="btn btn-secondary btn-small" disabled>📞 Audio</button>
+                        <button id="chat-panel-call-btn" class="btn btn-secondary btn-small" disabled>🎥 Video</button>
+                    </div>
+                </div>
+
+                <div id="chat-panel-messages" class="chat-panel-messages">
+                    <div class="empty-state">
+                        <p>No active conversation.</p>
+                        <p>Click a message button to start chat.</p>
+                    </div>
+                </div>
+
+                <form id="chat-panel-form" class="chat-panel-input-area">
+                    <input type="text" id="chat-panel-input" placeholder="Type your message..." autocomplete="off" disabled>
+                    <button type="submit" class="btn btn-primary btn-small" disabled>Send</button>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add User Modal -->
+    <div id="add-user-modal" class="modal">
+        <div class="modal-content card">
+            <div class="modal-header">
+                <h2>Register New User</h2>
+                <button id="close-modal" class="btn-icon">&times;</button>
+            </div>
+            <form id="add-user-form">
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" id="reg-name" required placeholder="e.g., Alice">
+                </div>
+                
+                <div class="form-group">
+                    <label>Bio</label>
+                    <input type="text" id="reg-bio" required placeholder="A short description about yourself">
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Location</label>
+                        <input type="text" id="reg-location" required placeholder="e.g., New York">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Experience Level</label>
+                        <select id="reg-level" required>
+                            <option value="Beginner">Beginner</option>
+                            <option value="Intermediate">Intermediate</option>
+                            <option value="Advanced">Advanced</option>
+                            <option value="Expert">Expert</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Availability</label>
+                        <select id="reg-availability" required>
+                            <option value="Weekends">Weekends</option>
+                            <option value="Evenings">Evenings</option>
+                            <option value="Weekdays">Weekdays</option>
+                            <option value="Flexible">Flexible</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Skills I Know (Comma separated)</label>
+                    <input type="text" id="reg-knows" required placeholder="e.g., HTML, CSS, JavaScript, Python">
+                    <small>Separate multiple skills with commas.</small>
+                </div>
+
+                <div class="form-group">
+                    <label>Skills I Want to Learn (Comma separated)</label>
+                    <input type="text" id="reg-wants" required placeholder="e.g., React, Node.js, UI Design">
+                    <small>Separate multiple skills with commas.</small>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" id="btn-cancel-modal" class="btn btn-secondary">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save User</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Call Modal -->
+    <div id="call-modal" class="modal">
+        <div class="modal-content card call-container">
+            <div class="modal-header chat-header">
+                <div class="chat-header-info" id="call-header-info">
+                    <!-- Injected by JS -->
+                </div>
+                <button id="close-call-modal" class="btn-icon">&times;</button>
+            </div>
+
+            <div class="call-videos">
+                <div class="video-box" id="local-video-box">
+                    <h4>You</h4>
+                    <video id="local-video" autoplay muted playsinline></video>
+                </div>
+                <div class="video-box" id="remote-video-box">
+                    <h4>Peer</h4>
+                    <video id="remote-video" autoplay playsinline></video>
+                    <audio id="remote-audio" autoplay></audio>
+                </div>
+            </div>
+
+            <div class="call-controls">
+                <span id="call-status">Preparing call...</span>
+                <button id="btn-end-call" class="btn btn-danger">End Call</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="match.js"></script>
+</body>
+</html>

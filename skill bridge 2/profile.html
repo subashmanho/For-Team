@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SkillBridge - Complete Your Profile</title>
+
+  <!-- Link to our stylesheet -->
+  <link rel="stylesheet" href="profile.css" />
+</head>
+<body>
+
+  <!-- ===================== PAGE HEADER ===================== -->
+  <header class="profile-header">
+    <div class="profile-header-row">
+      <div>
+        <h1>Complete Your Profile</h1>
+        <p>Help others discover your skills.</p>
+      </div>
+      <button type="button" class="logout-btn" id="logoutBtn">Log Out</button>
+    </div>
+  </header>
+
+  <main class="profile-container">
+    <form id="profileForm">
+
+      <!-- ===================== SECTION 1: BASIC INFORMATION ===================== -->
+      <section class="profile-card">
+        <h2 class="section-title">1. Basic Information</h2>
+
+        <!-- Profile image preview + upload -->
+        <div class="image-upload-wrapper">
+          <img
+            id="imagePreview"
+            src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23e2e8f0'/%3E%3Ccircle cx='50' cy='38' r='18' fill='%2394a3b8'/%3E%3Cellipse cx='50' cy='88' rx='32' ry='24' fill='%2394a3b8'/%3E%3C/svg%3E"
+            alt="Profile preview"
+            class="image-preview"
+          />
+          <label for="profileImageInput" class="upload-label">
+            Choose Photo
+            <input type="file" id="profileImageInput" accept="image/*" hidden />
+          </label>
+        </div>
+
+        <div class="form-grid">
+          <div class="input-group">
+            <label for="fullName">Full Name</label>
+            <input type="text" id="fullName" placeholder="Your full name" required />
+          </div>
+
+          <div class="input-group">
+            <label for="age">Age</label>
+            <input type="number" id="age" min="1" max="120" placeholder="Your age" required />
+          </div>
+
+          <div class="input-group">
+            <label for="gender">Gender</label>
+            <select id="gender" required>
+              <option value="" disabled selected>Select gender</option>
+              <option value="Female">Female</option>
+              <option value="Male">Male</option>
+              <option value="Other">Other</option>
+              <option value="Prefer not to say">Prefer not to say</option>
+            </select>
+          </div>
+
+          <div class="input-group">
+            <label for="education">Education</label>
+            <input type="text" id="education" placeholder="e.g. B.Sc Computer Science" required />
+          </div>
+
+          <div class="input-group">
+            <label for="occupation">Occupation</label>
+            <input type="text" id="occupation" placeholder="e.g. Student, Developer" required />
+          </div>
+
+          <div class="input-group">
+            <label for="location">Location</label>
+            <input type="text" id="location" placeholder="City, Country" required />
+          </div>
+        </div>
+
+        <div class="input-group full-width">
+          <label for="bio">Short Bio</label>
+          <textarea id="bio" rows="3" placeholder="Tell others a little about yourself..."></textarea>
+        </div>
+      </section>
+
+      <!-- ===================== SECTION 2: SKILLS YOU CAN TEACH ===================== -->
+      <section class="profile-card">
+        <h2 class="section-title">2. Skills You Can Teach</h2>
+        <p class="section-hint">Pick from the list or add your own.</p>
+
+        <!-- Example skill buttons the user can click to add -->
+        <div class="example-skills" id="teachExampleSkills">
+          <!-- Filled in dynamically by JavaScript -->
+        </div>
+
+        <!-- Custom skill input -->
+        <div class="custom-skill-row">
+          <input type="text" id="teachCustomInput" placeholder="Add a custom skill..." />
+          <button type="button" class="add-btn" onclick="addCustomSkill('teach')">Add</button>
+        </div>
+
+        <!-- Selected skills shown as tags -->
+        <div class="tag-container" id="teachTags"></div>
+      </section>
+
+      <!-- ===================== SECTION 3: SKILLS YOU WANT TO LEARN ===================== -->
+      <section class="profile-card">
+        <h2 class="section-title">3. Skills You Want to Learn</h2>
+        <p class="section-hint">Pick from the list or add your own.</p>
+
+        <div class="example-skills" id="learnExampleSkills">
+          <!-- Filled in dynamically by JavaScript -->
+        </div>
+
+        <div class="custom-skill-row">
+          <input type="text" id="learnCustomInput" placeholder="Add a custom skill..." />
+          <button type="button" class="add-btn" onclick="addCustomSkill('learn')">Add</button>
+        </div>
+
+        <div class="tag-container" id="learnTags"></div>
+      </section>
+
+      <!-- ===================== SECTION 4: LEARNING PREFERENCE ===================== -->
+      <section class="profile-card">
+        <h2 class="section-title">4. Learning Preference</h2>
+
+        <div class="radio-group">
+          <label class="radio-label">
+            <input type="radio" name="learningPreference" value="Online" checked />
+            Online
+          </label>
+          <label class="radio-label">
+            <input type="radio" name="learningPreference" value="Offline" />
+            Offline
+          </label>
+          <label class="radio-label">
+            <input type="radio" name="learningPreference" value="Both" />
+            Both
+          </label>
+        </div>
+      </section>
+
+      <!-- ===================== SECTION 5: AVAILABILITY ===================== -->
+      <section class="profile-card">
+        <h2 class="section-title">5. Availability</h2>
+
+        <div class="input-group">
+          <label for="availability">When are you usually free?</label>
+          <select id="availability" required>
+            <option value="" disabled selected>Select availability</option>
+            <option value="Weekdays">Weekdays</option>
+            <option value="Weekends">Weekends</option>
+            <option value="Evenings">Evenings</option>
+            <option value="Flexible">Flexible</option>
+          </select>
+        </div>
+      </section>
+
+      <!-- ===================== ACTION BUTTONS ===================== -->
+      <div class="action-buttons">
+        <button type="button" class="back-btn" onclick="window.location.href='match.html'">Back</button>
+        <button type="submit" class="save-btn">Save Profile</button>
+      </div>
+
+    </form>
+  </main>
+
+  <!-- ===================== SUCCESS POPUP ===================== -->
+  <!-- Hidden by default, shown by JavaScript after saving -->
+  <div class="popup-overlay" id="popupOverlay">
+    <div class="popup-box">
+      <div class="popup-icon">✔</div>
+      <h3>Profile Saved Successfully!</h3>
+      <button class="popup-close-btn" onclick="closePopup()">Go to dashboard</button>
+      <link rel="spreadsheet" href="match.html" />
+      
+
+
+    </div>
+  </div>
+
+  <!-- Link to our JavaScript file (ES module for Supabase) -->
+  <script type="module" src="js/profile.js"></script>
+</body>
+</html>
