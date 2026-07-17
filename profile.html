@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SkillBridge - Learn Together, Teach Together</title>
+  <link rel="stylesheet" href="./profile.css?v=2" />
+</head>
+<body>
+  <header class="profile-header">
+    <h1>User Profile</h1>
+    <p>Passionate mentor and lifelong learner.</p>
+  </header>
+
+  <main class="profile-container">
+    <section class="profile-card">
+      <div class="image-upload-wrapper">
+        <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'><rect fill='%23f8fafc' width='80' height='80'/><circle cx='40' cy='28' r='18' fill='%23e2e8f0'/><text x='40' y='54' font-size='20' text-anchor='middle' fill='%2364748b' font-family='Segoe UI, Arial'>photo</text></svg>" alt="Avatar" class="image-preview" />
+        <div>
+          <label class="upload-label" for="avatar">Change Photo</label>
+          <input id="avatar" type="file" style="display:none" /><br>
+          <p class="section-hint">Public profile photo</p>
+        </div>
+      </div>
+
+      <div class="section-title">About</div>
+      <p class="section-hint">Tell people what you teach and what you want to learn.</p>
+
+      <div class="form-grid">
+        <div class="input-group">
+          <label>Full name</label>
+          <input type="text" value="Your name" />
+        </div>
+        <div class="input-group">
+          <label>Location</label>
+          <input type="text" value="City, Country" />
+        </div>
+        <div class="input-group full-width">
+          <label>Bio</label>
+          <textarea rows="4">Experienced developer and teacher.</textarea>
+        </div>
+      </div>
+
+      <div class="section-title">Skills</div>
+      <div class="example-skills">
+        <button class="example-skill-btn selected">HTML</button>
+        <button class="example-skill-btn">CSS</button>
+        <button class="example-skill-btn">JavaScript</button>
+      </div>
+
+      <div class="action-buttons">
+        <button class="back-btn">Back</button>
+        <button class="save-btn">Save Profile</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
